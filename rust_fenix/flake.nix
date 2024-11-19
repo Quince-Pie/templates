@@ -16,18 +16,20 @@
         f {
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ fenix.overlays.default ];
+            overlays = [fenix.overlays.default];
           };
         });
   in {
-    devShells = forAllSystems ({ pkgs }: {
+    formatter = forAllSystems ({pkgs}: pkgs.alejandra);
+    devShells = forAllSystems ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
-          (pkgs.fenix.default.withComponents [
+          (pkgs.fenix.stable.withComponents [
             "cargo"
             "clippy"
             "rustc"
             "rust-docs"
+            "rust-src"
             "rustfmt"
           ])
           cargo-show-asm
@@ -42,11 +44,12 @@
             bacon
             cargo-show-asm
             cargo-nextest
-            (pkgs.fenix.default.withComponents [
+            (pkgs.fenix.stable.withComponents [
               "cargo"
               "clippy"
               "rustc"
               "rust-docs"
+              "rust-src"
               "rustfmt"
             ])
             pkgs.fenix.rust-analyzer
