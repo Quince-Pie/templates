@@ -1,5 +1,5 @@
 {
-  description = "A Nix Dev Env for Python3";
+  description = "A Nix Dev Env for Python3.12";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -20,13 +20,12 @@
       default = pkgs.mkShell {
         packages = with pkgs;
           [
-            (python3.withPackages (pyPkgs: [
+            (python312.withPackages (pyPkgs: [
               # Pkgs here
             ]))
-            ruff
             pyright
-          ]
-          ++ [
+            ruff
+            uv
           ];
       };
     });
