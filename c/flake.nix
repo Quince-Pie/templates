@@ -1,5 +1,5 @@
 {
-  description = "C Development Environments with LLVM 17 and GCC 14";
+  description = "C Development Environments with LLVM 19 and GCC 14";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -51,8 +51,9 @@
           gf
         ];
 
-      llvmPackages = with pkgs.llvmPackages_17; [
-        clang-tools_17
+      llvmPackages = with pkgs.llvmPackages_19; [
+        clang-tools
+        clang
         lldb
         llvm
         bintools
@@ -62,13 +63,12 @@
         stdenv,
         extraPackages ? [],
       }:
-        pkgs.mkShell {
-          inherit stdenv;
+        (pkgs.mkShell.override { inherit stdenv; }) {
           packages = commonPackages ++ extraPackages;
         };
 
       gccStdenv = pkgs.gcc14Stdenv;
-      llvmStdenv = pkgs.llvmPackages_17.stdenv;
+      llvmStdenv = pkgs.llvmPackages_19.stdenv;
     in {
       default = mkDevShell {
         stdenv = gccStdenv;
