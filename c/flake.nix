@@ -63,7 +63,7 @@
         stdenv,
         extraPackages ? [],
       }:
-        (pkgs.mkShell.override { inherit stdenv; }) {
+        (pkgs.mkShell.override {inherit stdenv;}) {
           packages = commonPackages ++ extraPackages;
         };
 

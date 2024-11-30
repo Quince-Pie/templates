@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    fenix.url = "github:nix-community/fenix";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -38,7 +41,7 @@
           pkgs.fenix.rust-analyzer
         ];
       };
-      cross = pkgs.mkShell {
+      crossAArch64 = pkgs.mkShell {
         packages = with pkgs;
           [
             bacon

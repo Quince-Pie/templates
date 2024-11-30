@@ -18,15 +18,14 @@
     formatter = forAllSystems ({pkgs}: pkgs.alejandra);
     devShells = forAllSystems ({pkgs}: {
       default = pkgs.mkShell {
-        packages = with pkgs;
-          [
-            (python312.withPackages (pyPkgs: [
-              # Pkgs here
-            ]))
-            pyright
-            ruff
-            uv
-          ];
+        packages = with pkgs; [
+          (python312.withPackages (pyPkgs: [
+            # Pkgs here
+          ]))
+          pyright
+          ruff
+          uv
+        ];
       };
     });
   };

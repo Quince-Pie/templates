@@ -3,7 +3,6 @@
 
   outputs = {self}: {
     templates = rec {
-
       c = {
         path = ./c;
         description = "a Multi C Development Environment with LLVM and GCC and linkers";
@@ -19,12 +18,18 @@
         description = "A Python 3.12 Development Environment";
       };
 
-      rust = {
+      rustFenix = {
         path = ./rust_fenix;
-        description = "Rust Development Environment";
+        description = "Rust Development Environment Via nix-community/fenix";
+      };
+
+      rustOxalica = {
+        path = ./rust_oxalica;
+        description = "Rust Development Environment Via oxalica/rust-overlay";
       };
 
       # Aliases
+      rust = rustOxalica;
       rs = rust;
       py = python;
     };
